@@ -1,0 +1,27 @@
+{
+  "author": "Josh David Miller",
+  "name": "ng-curtain",
+  "version": "0.0.1",
+  "homepage": "http://joshdmiller.github.io/ng-curtain",
+  "licenses": {
+    "type": "GPL",
+    "url": "https://raw.github.com/joshdmiller/ng-curtain/master/LICENSE"
+  },
+  "bugs": "https://github.com/joshdmiller/ng-curtain/issues",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:joshdmiller/ng-curtain.git"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "~0.4",
+    "grunt-recess": "~0.3",
+    "grunt-contrib-clean": "~0.4",
+    "grunt-contrib-jshint": "~0.4",
+    "grunt-contrib-concat": "~0.3",
+    "grunt-contrib-watch": "~0.4",
+    "grunt-contrib-uglify": "~0.2",
+    "grunt-karma": "~0.4",
+    "grunt-ngmin": "~0.0.2"
+  }
+}

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html ng-app="ngCurtainDemo" ng-controller="AppCtrl">
+  <head>
+    <title>ng-curtain</title>
+
+    <!-- your compiles CSS -->
+    <link rel="stylesheet" type="text/css" href="<%= grunt.config.get('pkg.name') %>.css"/>
+
+    <!-- libs.js contains all of the concatenated third-party libraries -->
+    <script type="text/javascript" src="libs.js"></script>
+
+    <!-- this is your compiled, minified application code -->
+    <script type="text/javascript" src="<%= grunt.config.get('pkg.name') %>.js"></script>
+
+    <!-- inline demo code -->
+    <script type="text/javascript">
+      var app = angular.module( 'ngCurtainDemo', [ 'ngCurtain', 'placeholders' ] );
+
+      app.controller( 'AppCtrl', function ( $scope ) {
+        console.log('hello!');
+      });
+    </script>
+  </head>
+  <body>
+    <h1>Hello!</h1>
+  </body>
+</html>

@@ -1,0 +1,8 @@
+{
+  "name": "ng-curtain",
+  "version": "0.0.1",
+  "devDependencies": {
+    "angular-unstable": "~1.1.4",
+    "angular-mocks": "~1.0.6"
+  }
+}

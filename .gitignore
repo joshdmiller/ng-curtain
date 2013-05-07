@@ -1,0 +1,7 @@
+*.sw*
+*~
+build/
+vendor/angular/
+vendor/angular-unstable/
+vendor/angular-mocks/
+node_modules/
