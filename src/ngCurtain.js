@@ -1,6 +1,6 @@
 angular.module( 'ngCurtain', [] )
 
-.directive( 'ctnCurtain', function( $window, $document ) {
+.directive( 'ctnCurtain', function( $window, $document, $location ) {
   return {
     restrict: 'EA',
     transclude: true,
@@ -30,7 +30,17 @@ angular.module( 'ngCurtain', [] )
        * Change the current section.
        */
       this.setCurrent = $scope.setCurrent = function ( idx ) {
-        currentSectionIdx = idx || 0;
+        if ( ! angular.isDefined( idx ) ) {
+          var path = $location.path();
+          angular.forEach( sections, function forEachSectionCheckLocation ( section, index ) {
+            if ( section.path === path ) {
+              currentSectionIdx = index;
+            }
+          });
+        } else {
+          currentSectionIdx = idx;
+        }
+
         var currSection = sections[ currentSectionIdx ];
 
         angular.forEach( sections, function forEachRemoveCurrent ( section ) {
@@ -40,6 +50,7 @@ angular.module( 'ngCurtain', [] )
 
         currSection.isCurrent = true;
         currSection.isHidden = false;
+        $location.path( currSection.path );
 
         if ( sections.length > currentSectionIdx + 1 ) {
           sections[ currentSectionIdx + 1 ].isHidden = false;
@@ -120,8 +131,8 @@ angular.module( 'ngCurtain', [] )
 
     },
     link: function link ( scope, element, attrs ) {
-      scope.setCurrent();
       scope.configureSections();
+      scope.setCurrent();
 
       scope.window.bind( 'resize', function () { scope.$apply( scope.configureSections ); } );
       scope.window.bind( 'scroll', function () { scope.$apply( scope.handleScroll ); } );
@@ -168,6 +179,7 @@ angular.module( 'ngCurtain', [] )
     link: function( scope, element, attrs, ctnCurtainCtrl ) {
       ctnCurtainCtrl.addSection( scope );
       scope.isCover = scope.$eval( attrs.ctnSectionCover );
+      scope.path = '/' + attrs.ctnSection;
     }
   };
 })
