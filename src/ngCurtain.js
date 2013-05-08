@@ -153,12 +153,12 @@ angular.module( 'ngCurtain', [] )
       $scope.setPosition = function setPosition () {
         if ( $scope.isCover ) {
           $element.css({
-            minHeight: $scope.height,
+            minHeight: $scope.height + 'px',
             zIndex: $scope.zIndex
           });
         } else {
           $element.css({
-            height: $scope.height,
+            height: $scope.height + 'px',
             zIndex: $scope.zIndex
           });
         }
