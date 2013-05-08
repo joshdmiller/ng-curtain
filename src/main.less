@@ -1,3 +1,9 @@
+/**
+ * ngCurtain Styles
+ * ----------------
+ * These are required to make ngCurtain work.
+ */
+
 html {
   height: 100%;
   overflow-x: hidden;
@@ -22,18 +28,8 @@ html {
   z-index:1;
 }
 
-.curtains > li.hidden { display:none; }
+.curtains > li.hidden { display: none !important; }
 .curtains > li:first-child { z-index:2; }
 
-.curtains li.section1 {
-  background-color: blue;
-}
-
-.curtains li.section2 {
-  background-color: green;
-}
-
-.curtains li.section3 {
-  background-color: red;
-}
+@import 'demo.less';
 

@@ -5,6 +5,7 @@ module.exports = function ( grunt ) {
    * in `package.json` when you do `npm install` in this directory.
    */
   grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-watch');
@@ -81,6 +82,22 @@ module.exports = function ( grunt ) {
      * The directory to delete when `grunt clean` is executed.
      */
     clean: [ '<%= build_dir %>' ],
+
+    /**
+     * Copies our static assets.
+     */
+    copy: {
+      fonts: {
+        files: [
+          {
+            expand: true,
+            src: [ 'vendor/font-awesome/font/*' ],
+            dest: '<%= build_dir %>/font',
+            flatten: true
+          }
+        ]
+      }
+    },
 
     /**
      * `grunt concat` concatenates multiple source files into a single file.
@@ -251,7 +268,7 @@ module.exports = function ( grunt ) {
         files: [ 
           '<%= app_files.js %>'
         ],
-        tasks: [ 'jshint:src', 'karma:unit:run', 'concat:dist', 'ngmin:dist', 'uglify:dist' ]
+        tasks: [ 'jshint:src', /*'karma:unit:run',*/ 'concat:dist', 'ngmin:dist', 'uglify:dist' ]
       },
 
       /**
@@ -266,7 +283,7 @@ module.exports = function ( grunt ) {
        * When the CSS files change, we need to compile and minify just them.
        */
       less: {
-        files: [ '<%= app_files.less %>' ],
+        files: [ 'src/**/*.less' ],
         tasks: [ 'recess' ]
       },
 
@@ -294,13 +311,13 @@ module.exports = function ( grunt ) {
    * before watching for changes.
    */
   grunt.renameTask( 'watch', 'delta' );
-  grunt.registerTask( 'watch', [ 'default', 'karma:unit', 'delta' ] );
+  grunt.registerTask( 'watch', [ 'default', /*'karma:unit',*/ 'delta' ] );
 
   /**
    * The default task is to build.
    */
   grunt.registerTask( 'default', [ 'build' ] );
-  grunt.registerTask( 'build', ['clean', 'jshint', 'karma:continuous', 'concat', 'ngmin:dist', 'uglify', 'recess', 'index'] );
+  grunt.registerTask( 'build', ['clean', 'jshint', /*'karma:continuous',*/ 'copy', 'concat', 'ngmin:dist', 'uglify', 'recess', 'index'] );
 
   /**
    * A task to build the project, without some of the slower processes. This is

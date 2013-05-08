@@ -1,0 +1,102 @@
+/**
+ * Demo Styles
+ * -----------
+ * These styles make the demo attractive rather than just functional.
+ */
+
+/*
+ * Just to make the demo look pretty, we import Twitter Bootstrap, Font
+ * Awesome, and a nice font.
+ */
+
+@import '../vendor/bootstrap/less/bootstrap.less';
+@import '../vendor/font-awesome/less/font-awesome.less';
+@import 'http://fonts.googleapis.com/css?family=Quicksand:300normal,400normal,700normal';
+
+@FontAwesomePath: 'font';
+
+/**
+ * The section appearances.
+ */
+
+@color1: #6699cc;
+
+.curtains li.section-cover {
+  display: table;
+  background-color: @color1;
+}
+
+.curtains li.section2 {
+  background-color: #FFF;
+}
+
+.curtains li.section-footer {
+  display: table;
+  background-color: #6699cc;
+}
+
+/**
+ * Jumbotron
+ */
+.jumbotron {
+  display: table-cell;
+  vertical-align: middle;
+  font-family: 'Quicksand';
+  color: #FFF;
+  line-height: 1.2;
+  text-align: center;
+
+  .brand {
+    font-size: 100px;
+  }
+
+  .tagline {
+    margin-top: 30px;
+    font-size: 24px;
+  }
+
+  a {
+    color: #FFF;
+    text-decoration: underline;
+    &:hover {
+      color: #FF6B6B;
+    }
+  }
+}
+
+.scroll-icon {
+  @iconSize: 75px;
+  display: table;
+  position: absolute;
+  bottom: 75px;
+  left: 50%;
+  margin-left: -(@iconSize / 2);
+  width: @iconSize;
+  height: @iconSize;
+  border-radius: @iconSize;
+  background-color: #FFF;
+
+  .inner {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    color: @color1;
+    font-size: 32px;
+    font-weight: bold;
+  }
+}
+
+
+/**
+ * Social links
+ */
+
+.social {
+  margin-top: 30px;
+
+  a {
+    text-decoration: none;
+    font-size: 36px;
+  }
+}
+
