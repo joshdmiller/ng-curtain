@@ -14,6 +14,7 @@ angular.module( 'ngCurtain', [] )
       var bodyHeight;
       var currentSectionIdx;
       var body = $document.find( 'body' );
+      $scope.locationChangeFromScroll = false;
 
       // FIXME: only works on webkit
       var scrollEl = body;
@@ -30,16 +31,7 @@ angular.module( 'ngCurtain', [] )
        * Change the current section.
        */
       this.setCurrent = $scope.setCurrent = function ( idx ) {
-        if ( ! angular.isDefined( idx ) ) {
-          var path = $location.path();
-          angular.forEach( sections, function forEachSectionCheckLocation ( section, index ) {
-            if ( section.path === path ) {
-              currentSectionIdx = index;
-            }
-          });
-        } else {
-          currentSectionIdx = idx;
-        }
+        currentSectionIdx = idx || 0;
 
         var currSection = sections[ currentSectionIdx ];
 
@@ -55,6 +47,25 @@ angular.module( 'ngCurtain', [] )
         if ( sections.length > currentSectionIdx + 1 ) {
           sections[ currentSectionIdx + 1 ].isHidden = false;
         }
+      };
+
+      $scope.scrollTo = function scrollTo () {
+        var path = $location.path();
+        angular.forEach( sections, function forEachSectionCheckLocation ( section, index ) {
+          if ( section.path === path ) {
+            currentSectionIdx = index;
+          }
+        });
+        currentSectionIdx = currentSectionIdx || 0;
+
+        $scope.setCurrent( currentSectionIdx );
+        body.prop( 'scrollTop', sections[ currentSectionIdx ].levelHeight );
+        
+        angular.forEach( sections, function forEachSectionCheckLocation ( section, index ) {
+          if ( index < currentSectionIdx ) {
+            section.translate( -(section.height) );
+          }
+        });
       };
 
       /**
@@ -91,7 +102,7 @@ angular.module( 'ngCurtain', [] )
           bodyHeight += parseInt( section.height, 10 );
 
           // increment the current top position by this one's height
-          levelHeight += section.height;
+          levelHeight += parseInt( section.height, 10 );
 
         });
 
@@ -113,6 +124,7 @@ angular.module( 'ngCurtain', [] )
          */
         if ( documentTop < currSectionPos && currentSectionIdx > 0 ) {
           currSection.translate( 0 );
+          $scope.locationChangeFromScroll = true;
           $scope.setCurrent( currentSectionIdx - 1 );
         } 
         /**
@@ -125,6 +137,7 @@ angular.module( 'ngCurtain', [] )
         * If we're scrolling down to a new section...
         */ 
         else {
+          $scope.locationChangeFromScroll = true;
           $scope.setCurrent( currentSectionIdx + 1 );
         }
       };
@@ -132,10 +145,18 @@ angular.module( 'ngCurtain', [] )
     },
     link: function link ( scope, element, attrs ) {
       scope.configureSections();
-      scope.setCurrent();
+      scope.scrollTo();
 
       scope.window.bind( 'resize', function () { scope.$apply( scope.configureSections ); } );
       scope.window.bind( 'scroll', function () { scope.$apply( scope.handleScroll ); } );
+
+      scope.$on( '$locationChangeSuccess', function locationChangeSuccessHandler ( path ) {
+        if ( ! scope.locationChangeFromScroll ) {
+          scope.scrollTo( path );
+        }
+          
+        scope.locationChangeFromScroll = false;
+      });
     }
   };
 })
@@ -153,12 +174,12 @@ angular.module( 'ngCurtain', [] )
       $scope.setPosition = function setPosition () {
         if ( $scope.isCover ) {
           $element.css({
-            minHeight: $scope.height + 'px',
+            height: $scope.height + 'px',
             zIndex: $scope.zIndex
           });
         } else {
           $element.css({
-            height: $scope.height + 'px',
+            minHeight: $scope.height + 'px',
             zIndex: $scope.zIndex
           });
         }
