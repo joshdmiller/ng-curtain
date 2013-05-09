@@ -1,6 +1,6 @@
 angular.module( 'ngCurtain', [] )
 
-.directive( 'ctnCurtain', function( $window, $document, $location ) {
+.directive( 'ctnCurtains', function( $window, $document, $location ) {
   return {
     restrict: 'EA',
     transclude: true,
@@ -140,14 +140,14 @@ angular.module( 'ngCurtain', [] )
   };
 })
 
-.directive( 'ctnSection', function() {
+.directive( 'ctnCurtain', function() {
   return {
     restrict: 'EA',
     transclude: true,
     replace: true,
     template: '<li class="curtains" ng-class="{ current: isCurrent, cover: isCover, hidden: isHidden }" ng-transclude></li>',
     scope: true,
-    require: '^ctnCurtain',
+    require: '^ctnCurtains',
     controller: function ( $scope, $element ) {
 
       $scope.setPosition = function setPosition () {
@@ -176,10 +176,10 @@ angular.module( 'ngCurtain', [] )
         return $element.prop( 'offsetHeight' );
       };
     },
-    link: function( scope, element, attrs, ctnCurtainCtrl ) {
-      ctnCurtainCtrl.addSection( scope );
-      scope.isCover = scope.$eval( attrs.ctnSectionCover );
-      scope.path = '/' + attrs.ctnSection;
+    link: function( scope, element, attrs, ctnCurtainsCtrl ) {
+      ctnCurtainsCtrl.addSection( scope );
+      scope.isCover = scope.$eval( attrs.ctnCover );
+      scope.path = '/' + attrs.ctnCurtain;
     }
   };
 })
