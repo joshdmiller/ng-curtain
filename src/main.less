@@ -9,13 +9,13 @@ html {
   overflow-x: hidden;
 }
 
-.curtains {
+.ctn-curtains {
   width: 100%;
   z-index:1;
   position:relative;
 }
 
-.curtains > li {
+.ctn-curtain {
   -webkit-transform:translateZ(0);
   background: white;
   position: fixed;
@@ -28,8 +28,6 @@ html {
   z-index:1;
 }
 
-.curtains > li.hidden { display: none !important; }
-.curtains > li:first-child { z-index:2; }
-
-@import 'demo.less';
+.ctn-curtain.hidden { display: none !important; }
+.ctn-curtain:first-child { z-index:2; }
 

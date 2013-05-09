@@ -5,7 +5,7 @@ angular.module( 'ngCurtain', [] )
     restrict: 'EA',
     transclude: true,
     replace: true,
-    template: '<ul class="curtains" ng-transclude></ul>',
+    template: '<ul class="ctn-curtains" ng-transclude></ul>',
     scope: true,
     controller: function ( $scope, $element ) {
       $scope.window = angular.element( $window );
@@ -145,7 +145,7 @@ angular.module( 'ngCurtain', [] )
     restrict: 'EA',
     transclude: true,
     replace: true,
-    template: '<li class="curtains" ng-class="{ current: isCurrent, cover: isCover, hidden: isHidden }" ng-transclude></li>',
+    template: '<li class="ctn-curtain" ng-class="{ current: isCurrent, cover: isCover, hidden: isHidden }" ng-transclude></li>',
     scope: true,
     require: '^ctnCurtains',
     controller: function ( $scope, $element ) {

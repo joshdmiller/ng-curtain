@@ -74,6 +74,11 @@ module.exports = function ( grunt ) {
     vendor_files: {
       js: [
         'vendor/angular-unstable/angular.js',
+        'vendor/rainbow/rainbow.js',
+        'vendor/rainbow/rainbow-generic.js',
+        'vendor/rainbow/rainbow-shell.js',
+        'vendor/rainbow/rainbow-html.js',
+        'vendor/rainbow/rainbow-javascript.js',
         'vendor/placeholders/angular-placeholders-0.0.1-SNAPSHOT.min.js'
       ]
     },
@@ -168,16 +173,20 @@ module.exports = function ( grunt ) {
      * imported from this file.
      */
     recess: {
+      options: {
+        compile: true,
+        compress: false,
+        noUnderscores: false,
+        noIDs: false,
+        zeroUnits: false
+      },
       build:  {
         src: [ '<%= app_files.less %>' ],
-        dest: '<%= build_dir %>/<%= pkg.name %>.css',
-        options: {
-          compile: true,
-          compress: false,
-          noUnderscores: false,
-          noIDs: false,
-          zeroUnits: false
-        }
+        dest: '<%= build_dir %>/<%= pkg.name %>.css'
+      },
+      demo: {
+        src: [ '<%= app_files.less %>', 'src/demo.less' ],
+        dest: '<%= build_dir %>/<%= pkg.name %>-demo.css'
       }
     },
 

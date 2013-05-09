@@ -6,14 +6,106 @@
 
 /*
  * Just to make the demo look pretty, we import Twitter Bootstrap, Font
- * Awesome, and a nice font.
+ * Awesome, and Rainbow (to highlight the code demos).
  */
 
 @import '../vendor/bootstrap/less/bootstrap.less';
 @import '../vendor/font-awesome/less/font-awesome.less';
-@import 'http://fonts.googleapis.com/css?family=Quicksand:300normal,400normal,700normal';
+@import '../vendor/rainbow/rainbow.less';
+
+/**
+ * Fonts
+ */
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Open Sans Light'), local('OpenSans-Light'), url(http://themes.googleusercontent.com/static/fonts/opensans/v6/DXI1ORHCpsQm3Vp6mXoaTXhCUOGz7vYGh680lGh-uXM.woff) format('woff');
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Open Sans'), local('OpenSans'), url(http://themes.googleusercontent.com/static/fonts/opensans/v6/cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff) format('woff');
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Open Sans Bold'), local('OpenSans-Bold'), url(http://themes.googleusercontent.com/static/fonts/opensans/v6/k3k702ZOKiLJc3WVjuplzHhCUOGz7vYGh680lGh-uXM.woff) format('woff');
+}
+@font-face {
+  font-family: 'Quicksand';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Quicksand Light'), local('Quicksand-Light'), url(http://themes.googleusercontent.com/static/fonts/quicksand/v2/qhfoJiLu10kFjChCCTvGlHhCUOGz7vYGh680lGh-uXM.woff) format('woff');
+}
+@font-face {
+  font-family: 'Quicksand';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Quicksand Regular'), local('Quicksand-Regular'), url(http://themes.googleusercontent.com/static/fonts/quicksand/v2/sKd0EMYPAh5PYCRKSryvWz8E0i7KZn-EPnyo3HZu7kw.woff) format('woff');
+}
+@font-face {
+  font-family: 'Quicksand';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Quicksand Bold'), local('Quicksand-Bold'), url(http://themes.googleusercontent.com/static/fonts/quicksand/v2/32nyIRHyCu6iqEka_hbKsnhCUOGz7vYGh680lGh-uXM.woff) format('woff');
+}
 
 @FontAwesomePath: 'font';
+@headerFontFamily: 'Quicksand', sans-serif;
+@baseFontFamily: 'Open Sans', sans-serif;
+
+/**
+ * Typography
+ */
+
+.ctn-curtain {
+  color: @white;
+  font-size: 18px;
+  line-height: 1.2;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: @headerFontFamily;
+}
+
+.header {
+  margin-bottom: 30px;
+  font-size: 50px;
+  line-height: 1.2;
+  color: @white;
+  font-family: @headerFontFamily;
+}
+
+.massive-icon {
+  font-size: 300px;
+  line-height: 1;
+  color: @white;
+}
+
+pre {
+  margin: 20px 0;
+}
+
+code {
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  .border-radius( 4px );
+  background-color: #2a211c;
+  color: #bdae9d;
+}
+
+.block {
+  margin-bottom: 60px;
+  text-align: justify;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
 
 /**
  * The section appearances.
@@ -21,30 +113,53 @@
 
 @color1: #6699cc;
 @color2: #FF6B6B;
+@color3: #FFB56B;
 
-.curtains li {
+.ctn-curtain {
   display: table;
 }
 
-.curtains li.section-cover {
+.ctn-curtain.section-cover, .ctn-curtain.section-footer {
   background-color: @color1;
+  
+  a {
+    color: @color3;
+    font-weight: bold;
+    text-decoration: none;
+
+    &:hover {
+      color: @color2;
+    }
+  }
 }
 
-.curtains li.section-about {
+.ctn-curtain.section-about {
   background-color: @color2;
+  
+  a {
+    color: @color3;
+    font-weight: bold;
+    text-decoration: none;
+
+    &:hover {
+      color: @color1;
+    }
+  }
 }
 
-.curtains li.section2 {
-  background-color: #FFF;
-}
+.ctn-curtain.section-usage {
+  background-color: @color3;
 
-.curtains li.section-footer {
-  background-color: #6699cc;
+  a {
+    color: @color2;
+    font-weight: bold;
+  }
 }
 
 .section-inner {
   display: table-cell;
   vertical-align: middle;
+  padding: 50px 0;
 }
 
 
@@ -52,7 +167,7 @@
  * Jumbotron
  */
 .jumbotron {
-  font-family: 'Quicksand';
+  font-family: @headerFontFamily;
   color: #FFF;
   line-height: 1.2;
   text-align: center;
@@ -65,21 +180,13 @@
     margin-top: 30px;
     font-size: 24px;
   }
-
-  a {
-    color: #FFF;
-    text-decoration: underline;
-    &:hover {
-      color: @color2;
-    }
-  }
 }
 
 .scroll-icon {
   @iconSize: 75px;
   display: table;
   position: absolute;
-  bottom: 75px;
+  bottom: 50px;
   left: 50%;
   margin-left: -(@iconSize / 2);
   width: @iconSize;
@@ -106,32 +213,13 @@
   margin-top: 30px;
 
   a {
-    text-decoration: none;
+    color: @white !important;
     font-size: 36px;
+
+    &:hover {
+      color: @color2 !important;
+    }
   }
 }
 
-
-/**
- * Typography
- */
-
-.header {
-  margin-bottom: 30px;
-  font-size: 60px;
-  line-height: 1.2;
-  color: @white;
-}
-
-.massive-icon {
-  font-size: 300px;
-  line-height: 1;
-  color: @white;
-}
-
-.curtains li {
-  color: @white;
-  font-size: 18px;
-  line-height: 1.2;
-}
 
