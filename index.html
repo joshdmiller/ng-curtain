@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html ng-app="ngCurtainDemo" ng-controller="AppCtrl">
+  <head>
+    <title>ng-curtain</title>
+
+    <!-- your compiles CSS -->
+    <link rel="stylesheet" type="text/css" href="ng-curtain-demo.css"/>
+
+    <!-- libs.js contains all of the concatenated third-party libraries -->
+    <script type="text/javascript" src="libs.js"></script>
+
+    <!-- this is your compiled, minified application code -->
+    <script type="text/javascript" src="ng-curtain.js"></script>
+    <!-- it's stupid to have to load it here, but this is for the +1 button -->
+    <script type="text/javascript" src="https://apis.google.com/js/plusone.js">
+      { "parsetags": "explicit" }
+    </script>
+
+    <!-- inline demo code -->
+    <script type="text/javascript">
+      var app = angular.module( 'ngCurtainDemo', [ 'ngCurtain', 'placeholders' ] );
+
+      app.controller( 'AppCtrl', function ( $scope ) {
+        console.log('hello!');
+      });
+
+      app.directive( 'plusOne', function() {
+        return {
+          link: function( scope, element, attrs ) {
+            gapi.plusone.render( element[0], {
+              "size": "medium",
+              "href": "http://bit.ly/ngCurtain"
+            });
+          }
+        };
+      });
+    </script>
+  </head>
+  <body>
+
+    <div ctn-curtains>
+
+      <!-- HOME -->
+      <div ctn-curtain="home" ctn-cover="true" class="section-cover">
+        <div class="section-inner jumbotron">
+          <div class="container">
+            <div class="brand">ngCurtain</div>
+            <div class="social-buttons">
+              <ul class="inline">
+                <li>
+                  <iframe 
+                    src="http://ghbtns.com/github-btn.html?user=joshdmiller&amp;repo=ng-curtain&amp;type=watch&amp;count=true" 
+                    allowtransparency="true" 
+                    frameborder="0" 
+                    scrolling="0" 
+                    width="110" 
+                    height="20">
+                  </iframe>
+                </li>
+                <li>
+                  <iframe 
+                    src="http://ghbtns.com/github-btn.html?user=joshdmiller&amp;repo=ng-curtain&amp;type=fork&amp;count=true" 
+                    allowtransparency="true" 
+                    frameborder="0" 
+                    scrolling="0" 
+                    width="95" 
+                    height="20">
+                  </iframe>
+                </li>
+                <li>
+                   <iframe allowtransparency="true" frameborder="0" scrolling="no"
+                    src="https://platform.twitter.com/widgets/tweet_button.html?url=http%3A%2F%2Fbit.ly%2FngCurtain&counturl=http%3A%2F%2Fjoshdmiller.github.io%2Fng-curtain&text=Check%20out%20ng-curtain%20-%20a%20wicked-cool%20unrolling%20effect%20for%20web%20sites%20%7C&hashtags=angularjs&via=joshdmiller&related=joshdmiller"
+                    style="width:130px; height:20px;"></iframe>
+                </li>
+                <li plus-one></li>
+              </ul> 
+            </div>
+            <div class="tagline">
+              A set of pure <a href="http://angularjs.org">AngularJS</a> directives to create a wicked-cool "rising
+              curtain" effect to unroll the sections of your website.
+            </div>
+            <div class="tagline">
+              Trust me. It's epic.
+            </div>
+          </div>
+        </div>
+
+        <div class="scroll-icon">
+          <div class="inner"><i class="icon-chevron-down"></i></div>
+        </div>
+      </div>
+
+      <!-- ABOUT -->
+      <div ctn-curtain="about" ctn-curtain-cover="true" class="section-about">
+        <div class="section-inner">
+          <div class="container">
+            <div class="row">
+              <div class="span6 massive-icon"><i class="icon-flag"></i></div>
+              <div class="span6">
+                <div class="header">What is it?</div>
+                <div class="body">
+                  <div class="block">
+                    <p>
+                      In a word: victory.
+                    </p>
+                    <p>
+                      ngCurtain is a set of directives for <a
+                      href="http://angularjs.org">AngularJS</a> applications to
+                      create the "rising curtain" scrolling effect you see on
+                      this page. 
+                    </p>
+                    <p>
+                      This project is based, in part, on the no-longer-maintained
+                      <a
+                      href="https://github.com/Victa/curtain.js">curtain.js</a>
+                      for jQuery, but contains some improvements that AngularJS
+                      makes easy. Not all features have yet been ported. For an
+                      up-to-date list, check out <a
+                      href="https://github.com/joshdmiller/ng-curtain/issues/1">Issue
+                      #1</a> on GitHub.
+                    </p>
+                    <p>
+                      Bower installation instructions are in the next section,
+                      but if you want the source code, visit the <a
+                      href="http://github.com/joshdmiller/ng-curtain">GitHub
+                      project page</a>.
+                    </p>
+                    <p>
+                      This is alpha quality software and contributions are
+                      welcomed. Please feel free to contact me, file an issue,
+                      or send a pull request (well, aren't you thoughtful?).
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- USAGE -->
+      <div ctn-curtain="usage" ctn-curtain-cover="true" class="section-usage">
+        <div class="section-inner">
+          <div class="container">
+            <div class="row">
+              <div class="span12">
+                <div class="header">Usage</div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="span6">
+                <div class="block">
+                  <h1>1. Install It</h1>
+                  <div class="body">
+                    <p>
+                      ngCurtain is available through <a href="http://bower.io">
+                      Bower</a>, so this is by far the easiest way to obtain
+                      it. Just run:
+                    </p>
+<pre ng-non-bindable><code data-language="shell">$ bower install --save-dev ng-curtain</code></pre>
+                    <p>
+                      This will download the latest version of ngCurtain and
+                      install it into your Bower directory (defaults to
+                      <code>components</code>). Boom!
+                    </p>
+                  </div>
+                </div>
+                <div class="block">
+                  <h1>2. Incorporate It</h1>
+                  <div class="body">
+                    <p>
+                      Now you have to add the script file to your application.
+                      You can, of course, just add a <code>script</code> tag.
+                      If you're using <a
+                      href="http://joshdmiller.github.io/ng-boilerplate">ngBoilerplate</a>
+                      or any of its derivatives, simply add it to the
+                      <code>vendor.js</code> array of your
+                      <code>Gruntfile.js</code>:
+                    </p>
+<pre ng-non-bindable><code data-language="javascript">vendor: {
+  js: [
+    // ...
+    'vendor/ng-curtain/ng-curtain.min.js',
+    // ...
+  ]
+},</code></pre>
+                    <p>
+                      However you get it there, as soon as it's in your build
+                      path, you need to tell your app module to depend on it:
+                    </p>
+<pre ng-non-bindable><code data-language="javascript">angular.module( 'myApp', [ 'ngCurtain', /* other deps */ ] );</code></pre>
+                    <p>
+                      Also be sure to include the stylesheet. In ngBoilerplate,
+                      simply import <code>ng-curtain.less</code> into your
+                      <code>main.less</code> file.
+                    </p>
+                    <p>
+                      Now you're ready to go! Sweet.
+                    </p>
+                  </div>
+                </div>
+                <div class="block">
+                  <h1>3. Use It</h1>
+                  <div class="body">
+                    <p>
+                      The markup for ngCurtain is fairly straightforward. There
+                      are two directives: <code>ctnCurtains</code> and
+                      <code>ctnCurtain</code>. The former is the main directive
+                      and wraps all content, accepting within it as many of the
+                      latter as necessary, each representing a separate curtain
+                      whose position to manage. Both can be used either as
+                      elements or as attributes.
+                    </p>
+                    <p>
+                      For example, the typical structure of ngCurtain therefore
+                      looks something like this:
+                    </p>
+<pre ng-non-bindable><code data-language="html"><ctn-curtains>
+  <div ctn-curtain="first-section" ctn-cover="true">
+    <!-- content here... -->
+  </div>
+  <div ctn-curtain="second-section">
+    <!-- content here... -->
+  </div>
+  <div ctn-curtain="third-section">
+    <!-- content here... -->
+  </div>
+  <div ctn-curtain="fourth-section">
+    <!-- content here... -->
+  </div>
+</ctn-curtains></code></pre>
+                    <p>
+                      Check out <a href="http://github.com/joshdmiller/ng-curtain/blob/master/src/index.html">
+                      this demo's source code</a> for a more detailed example.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="span6">
+                <div class="block">
+                  <h1>How it Works</h1>
+                  <div class="body">
+                    <p>
+                      If you're just interesting in <i>using</i> ngCurtain, you
+                      can ignore this section completely. But for those
+                      curious, this section contains an overview of how the
+                      code works.
+                    </p>
+                    <p>
+                      The outer directive (<code>ctnCurtains</code>) contains the
+                      vast majority of the logic as methods on its scope. The
+                      inner directives (<code>ctnCurtain</code>) require the
+                      outer directive and call a method during their linking
+                      phase to register their presence.
+                    </p>
+                    <p>
+                      After initialization of all the children, <code>ctnCurtains</code>
+                      calculates the positions of all the individual
+                      <code>ctnCurtain</code> elements that registered
+                      themselves, calculates the total window height, and
+                      determines which curtains to start where based on the
+                      current value of <code>$location.path()</code>. This same
+                      process is repeated every time the window is resized.
+                    </p>
+                    <p>
+                      Technically, all cards start positioned at
+                      <code>0,0</code> and the window's height is manually
+                      calculated and applied as the sum of the heights of the
+                      individual curtains.
+                    </p>
+                    <p>
+                      When the browser window scrolls, the
+                      <code>ctnCurtains</code> directive determines whether we
+                      are scrolling within a curtain, beyond a curtain, or
+                      above a curtain and arranges the positions and stacks
+                      appropriately and applies <code>translateY</code>
+                      operations to change the current vertical position of the
+                      curtain relative to the current (virtual) scroll
+                      position. That probably sounds confusing, but if you look
+                      at the code, it's pretty straightforward.
+                  </div>
+                </div>
+                <div class="block">
+                  <h1>ngCurtain API</h1>
+                  <div class="body">
+                    <h3>Attribute: ctnCover</h3>
+                    <p>
+                      While all curtains have a <i>minimum</i> height of the
+                      window height, it is not always desirable to allow some
+                      curtains to extend beyond the window height. For example,
+                      covers (like the first curtain here) make sense to not
+                      overflow the window as they are an "intro" whose display
+                      we want to control responsively. Setting the
+                      <code>ctnCover</code> attribute on a curtain to
+                      <code>true</code> will ensure the curtain does not exceed
+                      the current window height.
+                    </p>
+                    <p>
+                      <code>ctnCover</code> takes an expression, but that
+                      expression is never re-evaluated as it does not make
+                      sense to convert something that once was a cover into no
+                      longer a cover, and vice versa. The simplest use case is
+                      just the value <code>true</code>:
+                    </p>
+<pre ng-non-bindable><code data-language="html"><div ctn-curtain="mySection" ctn-cover="true">
+  <!-- I will be limited to the window height -->
+</div></code></pre>
+                    <h3>Class: current</h3>
+                    <p>
+                      Whichever <code>ctnCurtain</code> is currently active is
+                      given the class <code>current</code> (this can be
+                      configured in the template).
+                    </p>
+                    <p>
+                      No styles are by default associated with this class.
+                    </p>
+
+                    <h3>Class: hidden</h3>
+                    <p>
+                      When a <code>ctnCurtain</code> is not visible - either as
+                      the current curtain or the following or preceding
+                      curtain, if visible - it is assigned the
+                      <code>hidden</code> class (this can be configured in the
+                      template).
+                    </p>
+                    <p>
+                      By default, this simply sets <code>display: none</code>
+                      on the curtain.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FOOTER -->
+      <div ctn-curtain="contact" ctn-cover="true" class="section-footer">
+        <div class="section-inner jumbotron">
+          <div class="container">
+            <div class="brand">ngCurtain</div>
+            <div class="tagline">
+              Created by Josh David Miller
+            </div>
+            <ul class="social inline">
+              <li><a href="http://gplus.to/joshdmiller"><i class="icon-google-plus-sign"></i></a></li>
+              <li><a href="http://twitter.com/joshdmiller"><i class="icon-twitter-sign"></i></a></li>
+              <li><a href="http://github.com/joshdmiller"><i class="icon-github-sign"></i></a></li>
+              <li><a href="http://linkedin.com/in/joshdmiller"><i class="icon-linkedin-sign"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>

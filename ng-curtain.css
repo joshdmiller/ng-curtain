@@ -1,0 +1,38 @@
+/**
+ * ngCurtain Styles
+ * ----------------
+ * These are required to make ngCurtain work.
+ */
+
+html {
+  height: 100%;
+  overflow-x: hidden;
+}
+
+.ctn-curtains {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  margin: 0;
+}
+
+.ctn-curtain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  min-height: 100%;
+  overflow: hidden;
+  background: white;
+  -webkit-transform: translateZ(0);
+}
+
+.ctn-curtain.hidden {
+  display: none !important;
+}
+
+.ctn-curtain:first-child {
+  z-index: 2;
+}
