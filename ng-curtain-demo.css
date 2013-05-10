@@ -7720,6 +7720,14 @@ code {
   margin-top: 20px;
 }
 
+.row {
+  margin-bottom: 50px;
+}
+
+.row:last-child {
+  margin-bottom: 0;
+}
+
 /**
  * The section appearances.
  */
