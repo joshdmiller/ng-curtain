@@ -56,7 +56,7 @@ angular.module( 'ngCurtain', [] )
         currentSectionIdx = currentSectionIdx || 0;
 
         $scope.setCurrent( currentSectionIdx );
-        $scope.window.prop( 'scrollTop', sections[ currentSectionIdx ].levelHeight );
+        $scope.window[0].scroll( 0, sections[ currentSectionIdx ].levelHeight );
         
         angular.forEach( sections, function forEachSectionCheckLocation ( section, index ) {
           if ( index < currentSectionIdx ) {
