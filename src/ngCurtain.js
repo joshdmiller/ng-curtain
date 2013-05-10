@@ -16,9 +16,6 @@ angular.module( 'ngCurtain', [] )
       var body = $document.find( 'body' );
       $scope.locationChangeFromScroll = false;
 
-      // FIXME: only works on webkit
-      var scrollEl = body;
-
       /**
        * Used by the child ctnSection elements to register themselves as
        * sections within this curtain.
@@ -59,7 +56,7 @@ angular.module( 'ngCurtain', [] )
         currentSectionIdx = currentSectionIdx || 0;
 
         $scope.setCurrent( currentSectionIdx );
-        body.prop( 'scrollTop', sections[ currentSectionIdx ].levelHeight );
+        $scope.window.prop( 'scrollTop', sections[ currentSectionIdx ].levelHeight );
         
         angular.forEach( sections, function forEachSectionCheckLocation ( section, index ) {
           if ( index < currentSectionIdx ) {
@@ -78,17 +75,8 @@ angular.module( 'ngCurtain', [] )
         bodyHeight = 0;
 
         angular.forEach( sections, function forEachSection ( section, index ) {
-          
-          /**
-           * Covers are always the height of the window, whereas all other
-           * sections are at a minimum the height of the window.
-           */
-          if ( section.isCover ) {
-            height = windowHeight;
-          } else {
-            height = section.getHeight();
-            height = height <= windowHeight ? windowHeight : height;
-          }
+          // get the height of the element
+          height = section.getHeight();
 
           // set the current top position of the curtain
           section.levelHeight = levelHeight;
@@ -96,14 +84,13 @@ angular.module( 'ngCurtain', [] )
           // set the positions and make it so!
           section.height = height;
           section.zIndex = 999 - index;
-          section.setPosition();
+          section.setHeight( windowHeight );
 
           // increase the body height
           bodyHeight += parseInt( section.height, 10 );
 
           // increment the current top position by this one's height
           levelHeight += parseInt( section.height, 10 );
-
         });
 
         // set the calculated body height so there's something to scroll
@@ -114,7 +101,7 @@ angular.module( 'ngCurtain', [] )
        * Handle the scrolling.
        */
       $scope.handleScroll = function handleScroll () {
-        var documentTop = body.prop( 'scrollTop' );
+        var documentTop = $scope.window.prop( 'pageYOffset' );
         var currSection = sections[ currentSectionIdx ];
         var currSectionPos = currSection.levelHeight;
         var currSectionHeight = currSection.height;
@@ -171,25 +158,23 @@ angular.module( 'ngCurtain', [] )
     require: '^ctnCurtains',
     controller: function ( $scope, $element ) {
 
-      $scope.setPosition = function setPosition () {
-        if ( $scope.isCover ) {
-          $element.css({
-            height: $scope.height + 'px',
-            zIndex: $scope.zIndex
-          });
+      $scope.setHeight = function setHeight ( minHeight ) {
+        if ( $scope.isCover || $scope.height < minHeight ) {
+          $scope.height = minHeight;
+          $element.css( 'height', $scope.height + 'px' );
         } else {
-          $element.css({
-            minHeight: $scope.height + 'px',
-            zIndex: $scope.zIndex
-          });
+          $element.css( 'min-height', $scope.height + 'px' );
         }
+      
+        $element.css( 'z-index', $scope.zIndex );
       };
 
       $scope.translate = function translate ( top ) {
-        var prop = 'translateY('+top+'px) translateZ(0)';
+        var prop = 'translateY('+top+'px)';
         $element.css({
           transform: prop,
-          '-webkit-transform': prop
+          '-webkit-transform': prop,
+          '-moz-transform': prop
         });
       };
 
